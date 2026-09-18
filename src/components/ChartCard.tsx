@@ -13,7 +13,7 @@ export function ChartCard({
 }) {
   return (
     <section
-      className={`min-w-0 rounded-xl border p-4 sm:p-5 ${className}`}
+      className={`min-w-0 rounded-xl border p-4 shadow-sm sm:p-5 ${className}`}
       style={{ background: "var(--surface-1)", borderColor: "var(--border)" }}
     >
       <header className="mb-3">

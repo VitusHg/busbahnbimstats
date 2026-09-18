@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { TripDTO } from "@/lib/dto";
 import { VEHICLE_COLOR_VAR, VEHICLE_LABEL_DE } from "@/lib/chartTheme";
 import { formatDurationMin } from "@/lib/textUtils";
+import { VehicleIcon } from "./VehicleIcon";
 
 const PAGE_SIZE = 25;
 
@@ -37,7 +38,7 @@ export function TripList({ trips }: { trips: TripDTO[] }) {
                 type="button"
                 onClick={() => toggle(trip.id)}
                 aria-expanded={isOpen}
-                className="w-full text-left flex flex-wrap items-center gap-x-3 gap-y-1 cursor-pointer"
+                className="w-full text-left flex flex-wrap items-center gap-x-3 gap-y-1 cursor-pointer rounded-lg px-2 py-1 -mx-2 transition-colors hover:bg-[var(--surface-2)]"
               >
                 <span
                   className="text-xs tabular-nums w-24 shrink-0"
@@ -53,10 +54,12 @@ export function TripList({ trips }: { trips: TripDTO[] }) {
                 </span>
                 <span className="flex items-center gap-1 ml-auto">
                   {trip.vehicleKinds.map((kind) => (
-                    <span
+                    <VehicleIcon
                       key={kind}
-                      className="inline-block h-2 w-2 rounded-full"
-                      style={{ background: VEHICLE_COLOR_VAR[kind] }}
+                      kind={kind}
+                      size={15}
+                      className="shrink-0"
+                      style={{ color: VEHICLE_COLOR_VAR[kind] }}
                       title={VEHICLE_LABEL_DE[kind]}
                     />
                   ))}
@@ -83,10 +86,12 @@ export function TripList({ trips }: { trips: TripDTO[] }) {
               {isOpen ? (
                 <ol className="mt-2 ml-2 space-y-1.5 border-l pl-4" style={{ borderColor: "var(--border)" }}>
                   {trip.legs.map((leg) => (
-                    <li key={leg.id} className="text-xs flex flex-wrap items-baseline gap-x-2">
-                      <span
-                        className="inline-block h-1.5 w-1.5 rounded-full shrink-0"
-                        style={{ background: VEHICLE_COLOR_VAR[leg.vehicleKind] }}
+                    <li key={leg.id} className="text-xs flex flex-wrap items-center gap-x-2">
+                      <VehicleIcon
+                        kind={leg.vehicleKind}
+                        size={13}
+                        className="shrink-0"
+                        style={{ color: VEHICLE_COLOR_VAR[leg.vehicleKind] }}
                       />
                       <span className="tabular-nums" style={{ color: "var(--text-secondary)" }}>
                         {leg.departureTimeLocal}

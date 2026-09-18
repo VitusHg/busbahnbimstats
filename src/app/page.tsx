@@ -33,18 +33,31 @@ export default function Home() {
 
   return (
     <main className="flex-1 mx-auto w-full max-w-5xl px-4 py-8 sm:py-12">
-      <header className="mb-8">
-        <h1 className="text-2xl font-semibold" style={{ color: "var(--text-primary)" }}>
-          BusBahnBimStats
-        </h1>
-        <p className="text-sm mt-1" style={{ color: "var(--text-secondary)" }}>
-          Trag den öffentlich freigegebenen Kalender-Link deiner BusBahnBim-Fahrten ein (aus
-          der Kalender-App: „Kalender abonnieren“ / webcal-Link). Der Link und deine Fahrten
-          werden nirgends gespeichert außer lokal in deinem Browser.
-        </p>
-      </header>
+      {!data ? (
+        <header className="mb-6">
+          <h1
+            className="text-2xl sm:text-3xl font-bold tracking-tight"
+            style={{ color: "var(--text-primary)" }}
+          >
+            Wie fährst du wirklich?
+          </h1>
+          <p className="text-sm sm:text-base mt-2 max-w-2xl" style={{ color: "var(--text-secondary)" }}>
+            Trag den öffentlich freigegebenen Kalender-Link deiner BusBahnBim-Fahrten ein (aus
+            der Kalender-App: „Kalender abonnieren“ / webcal-Link) und wir machen eine Statistik
+            aus deinen Fahrten.
+          </p>
+        </header>
+      ) : null}
 
-      <UrlForm onSubmit={handleSubmit} loading={loading} />
+      <div
+        className="rounded-2xl border p-4 sm:p-5"
+        style={{ background: "var(--surface-1)", borderColor: "var(--border)" }}
+      >
+        <UrlForm onSubmit={handleSubmit} loading={loading} />
+        <p className="text-xs mt-2.5" style={{ color: "var(--text-muted)" }}>
+          Nichts wird auf einem Server gespeichert — der Link bleibt nur in deinem Browser.
+        </p>
+      </div>
 
       {error ? (
         <p

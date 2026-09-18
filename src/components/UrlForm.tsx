@@ -70,19 +70,20 @@ export function UrlForm({
         value={url}
         onChange={(event) => setUrl(event.target.value)}
         placeholder="webcal://... oder https://.../published/2/..."
-        className="flex-1 rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2"
+        className="flex-1 rounded-lg border px-3 py-2.5 text-sm outline-none transition-shadow focus:ring-2"
         style={{
-          background: "var(--surface-1)",
+          background: "var(--surface-2)",
           borderColor: "var(--border)",
           color: "var(--text-primary)",
+          ["--tw-ring-color" as string]: "var(--brand)",
         }}
       />
       <div className="flex gap-2">
         <button
           type="submit"
           disabled={loading || !url.trim()}
-          className="rounded-lg px-4 py-2 text-sm font-semibold text-white disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
-          style={{ background: "var(--series-1)" }}
+          className="rounded-lg px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed transition-opacity hover:opacity-90"
+          style={{ background: "var(--brand)" }}
         >
           {loading ? "Lädt…" : "Statistik laden"}
         </button>

@@ -8,7 +8,9 @@ import { TripsOverTimeChart } from "./TripsOverTimeChart";
 import { WeekdayHourHeatmap } from "./WeekdayHourHeatmap";
 import { RankBarList } from "./RankBarList";
 import { TripList } from "./TripList";
+import { MapSection } from "./MapSection";
 import { formatDurationMin } from "@/lib/textUtils";
+import { typicalWeekdayDeparture } from "@/lib/insights";
 
 export interface TripsResponse {
   trips: TripDTO[];
@@ -18,6 +20,7 @@ export interface TripsResponse {
 
 export function Dashboard({ data }: { data: TripsResponse }) {
   const { trips, stats, diagnostics } = data;
+  const typicalDeparture = typicalWeekdayDeparture(trips);
 
   if (stats.totals.trips === 0) {
     return (
@@ -41,7 +44,7 @@ export function Dashboard({ data }: { data: TripsResponse }) {
         </p>
       ) : null}
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
         <StatTile label="Fahrten" value={String(stats.totals.trips)} />
         <StatTile label="Etappen" value={String(stats.totals.legs)} />
         <StatTile
@@ -59,9 +62,18 @@ export function Dashboard({ data }: { data: TripsResponse }) {
           value={`${stats.longestStreakDays} Tage`}
           sub="in Folge unterwegs"
         />
+        {typicalDeparture ? (
+          <StatTile
+            label="Übliche Abfahrt"
+            value={typicalDeparture}
+            sub="werktags, Median"
+          />
+        ) : null}
       </div>
 
-      <ChartCard title="Fahrten im Zeitverlauf" subtitle="Anzahl Fahrten pro Tag">
+      <MapSection trips={trips} />
+
+      <ChartCard title="Fahrten im Zeitverlauf" subtitle="Anzahl Fahrten pro Tag, Woche oder Monat">
         <TripsOverTimeChart data={stats.overTime} />
       </ChartCard>
 

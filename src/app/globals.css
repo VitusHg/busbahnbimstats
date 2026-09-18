@@ -41,6 +41,13 @@
   --status-warning: #fab219;
   --status-serious: #ec835a;
   --status-critical: #d03b3b;
+
+  /* Brand accent (UI chrome only - buttons, header, links; never used to encode
+     chart data, so it isn't part of the validated categorical set above). */
+  --brand: #0f7a4f;
+  --brand-text: #0f7a4f;
+  --brand-soft: #e7f5ee;
+  --brand-soft-text: #0f7a4f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,6 +71,11 @@
     --series-4: #c98500;
     --series-5: #d55181;
     --series-6: #008300;
+
+    --brand: #0f7a4f;
+    --brand-text: #34d399;
+    --brand-soft: #132920;
+    --brand-soft-text: #34d399;
   }
 }
 
@@ -87,6 +99,11 @@
   --series-4: #c98500;
   --series-5: #d55181;
   --series-6: #008300;
+
+  --brand: #0f7a4f;
+  --brand-text: #34d399;
+  --brand-soft: #132920;
+  --brand-soft-text: #34d399;
 }
 
 body {
